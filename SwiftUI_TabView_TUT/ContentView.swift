@@ -10,15 +10,29 @@ import SwiftUI
 struct ContentView: View {
     @State private var selection = 0
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        NavigationView {
             TabView(selection: $selection) {
+                
+                List(1...10, id: \.self) { index in
+                    NavigationLink(
+                        destination: Text("아이템 \(index) 번 의 세부사항"),
+                        label: {
+                            Text("아이템 \(index)")
+                        })
+                }
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("홈으로")
+                }
+                .tag(0)
+                
                 Text("첫번째 뷰")
                     .font(.system(size: 30))
                     .tabItem {
-                        Image(systemName: "house.fill")
-                        Text("홈으로")
+                        Image(systemName: "person.fill")
+                        Text("사용자")
                     }
-                    .tag(0)
+                    .tag(1)
                 
                 Text("두번째 뷰")
                     .font(.system(size: 30))
@@ -26,7 +40,7 @@ struct ContentView: View {
                         Image(systemName: "bookmark.circle.fill")
                         Text("북마크")
                     }
-                    .tag(1)
+                    .tag(2)
                 
                 Text("세번째 뷰")
                     .font(.system(size: 30))
@@ -40,17 +54,7 @@ struct ContentView: View {
             .onAppear() {
                 UITabBar.appearance().barTintColor = .white
             }
-            Button(action : {
-                selection = (selection + 1) % 3
-            }) {
-                Text("다음")
-                    .font(.system(.headline))
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-                    .padding()
-            }
+            .navigationTitle("TabView")
         }
     }
 }
