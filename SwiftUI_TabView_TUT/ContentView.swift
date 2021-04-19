@@ -55,6 +55,8 @@ struct ContentView: View {
                 UITabBar.appearance().barTintColor = .white
             }
             .navigationTitle("TabView")
+            .tabViewStyle(PageTabViewStyle())
+            
         }
     }
 }
